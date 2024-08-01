@@ -1,0 +1,26 @@
+{
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/node": "^22.0.2"
+  },
+  "name": "vercel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "aws-sdk": "^2.1665.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "redis": "^4.7.0",
+    "simple-git": "^3.25.0",
+    "undici-types": "^6.11.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
