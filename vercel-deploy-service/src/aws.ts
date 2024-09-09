@@ -8,7 +8,6 @@ const s3 = new S3({
     secretAccessKey: S3_SECRET_ACCESS_KEY
 })
 
-// output/asdasd
 export async function downloadS3Folder(prefix: string) {
     const allFiles = await s3.listObjectsV2({
         Bucket: S3_BUCKET_NAME,
@@ -44,12 +43,18 @@ export async function downloadS3Folder(prefix: string) {
 }
 
 
-export function copyFinalDistFolderToS3(id: string) {
-    const fullFolderPath = path.join(__dirname, `output/${id}/dist`);
-    const files = getAllFiles(fullFolderPath)
-    files.forEach(async file => {
-        await uploadFile(`dist/${id}/` + file.slice(fullFolderPath.length + 1), file)
-    });
+export async function copyFinalDistFolderToS3(id: string) {
+    const distFolderPath = path.join(__dirname, `output/${id}/dist`);
+    const buildFolderPath = path.join(__dirname, `output/${id}/build`);
+
+    const folderToUse = fs.existsSync(distFolderPath) ? distFolderPath : buildFolderPath;
+
+    const files = getAllFiles(folderToUse);
+
+    for (const file of files) {
+        const relativePath = file.slice(folderToUse.length + 1);
+        await uploadFile(`dist/${id}/` + relativePath, file);
+    }
 }
 
 

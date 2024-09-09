@@ -11,7 +11,7 @@ app.get("/*", async (req, res) => {
     console.log(`dist/${id}${path}`);
     const response = await getFileFromBucket(`dist/${id}${path}`);
 
-    const mimeType = mime.lookup(path) || 'application/octet-stream'; // Default to 'application/octet-stream' if the MIME type is not found
+    const mimeType = mime.lookup(path) || 'application/octet-stream'; 
     res.set('Content-Type', mimeType);
     res.send(response.Body);
 });
